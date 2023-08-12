@@ -23,7 +23,7 @@ const RelatedProjects = async ({ userId, projectId }: Props) => {
       <div className="flexBetween">
         <p className="text-base font-bold">More by {result?.user?.name}</p>
         <Link 
-          href={`/profile/${result?.user?.id}`}
+          href={`/application/profile/${result?.user?.id}`}
           className="text-primary-purple text-base"
         >
           View All
@@ -34,7 +34,7 @@ const RelatedProjects = async ({ userId, projectId }: Props) => {
         {filteredProjects?.map(({ node }: { node: ProjectInterface }) => (
           <div className="flexCenter related_project-card drop-shadow-card">
             <Link
-              href={`/project${node?.id}`}
+              href={`/application/project${node?.id}`}
               className="flexCenter group relative w-full h-full"
             >
               <Image 

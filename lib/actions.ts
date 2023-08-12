@@ -1,5 +1,5 @@
 import { ProjectForm } from "@/common.types";
-import { createProjectMutation, createUserMutation, deleteProjectMutation, getProjectByIdQuery, getProjectsOfUserQuery, getUserQuery, projectsQuery, updateProjectMutation } from "@/graphql";
+import { createLike, createProjectMutation, createUserMutation, deleteLikeMutation, deleteProjectMutation, getProjectByIdQuery, getProjectsOfUserQuery, getUserQuery, projectsQuery, updateProjectMutation, updateUserMutation, usersQuery } from "@/graphql";
 import { GraphQLClient } from "graphql-request";
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -29,11 +29,21 @@ export const getUser = (email: string) => {
   return makeGraphQLRequest(getUserQuery, { email })
 }
 
+export const getUserList = (endCursor?: string) => {
+  client.setHeader('x-api-key', apiKey);
+  // client.setHeader('Authorization', `Bearer ${token}`);
+
+  return makeGraphQLRequest(usersQuery, {
+    endCursor
+  })
+}
+
 export const createUser = (name: string, email: string, avatarUrl: string) => {
   client.setHeader('x-api-key', apiKey)
   const variables = {
     input: {
-      name, email, avatarUrl
+      name, email, avatarUrl,
+      description: "Hi! I`m a developer 👋"
     }
   }
 
@@ -82,6 +92,31 @@ export const createNewProject = async (form: ProjectForm,
 
     return makeGraphQLRequest(createProjectMutation, variables);
   }
+}
+
+export const likePost = async (projectId: string, creatorId: string,
+  token: string) => {
+  client.setHeader("Authorization", `Bearer ${token}`);
+
+  const variables = {
+    input: {
+      user: {
+        link: creatorId
+      },
+      project: {
+        link: projectId
+      }
+    }
+  }
+
+  return makeGraphQLRequest(createLike, variables);
+}
+
+export const dislikePost = async (likeId: string,
+  token: string) => {
+  client.setHeader("Authorization", `Bearer ${token}`);
+
+  return makeGraphQLRequest(deleteLikeMutation, { id: likeId });
 }
 
 export const fetchAllProjects = async (category?: string, endCursor?: string) => {
@@ -135,4 +170,20 @@ export const updateProject = async (form: ProjectForm, projectId: string, token:
 
   client.setHeader('Authorization', `Bearer ${token}`);
   return makeGraphQLRequest(updateProjectMutation, variables);
+}
+
+export const updateUser = async (email: string, username: string, description: string, token: string) => {
+  client.setHeader('Authorization', `Bearer ${token}`);
+  client.setHeader('x-api-key', apiKey)
+
+  const variables = {
+    email: email,
+    input: {} as any
+  };
+
+  if (username) variables.input['name'] = username
+  if (description) variables.input['description'] = description;
+
+  console.log(variables)
+  return makeGraphQLRequest(updateUserMutation, variables);
 }

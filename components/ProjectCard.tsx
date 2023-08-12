@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import ProjectLike from './ProjectLike';
+import { SessionInterface } from '@/common.types';
 
 type Props = {
   id: string;
@@ -8,6 +10,17 @@ type Props = {
   name: string;
   avatarUrl: string;
   userId: string;
+  session: SessionInterface;
+  likes: {
+    edges: { 
+      node: {
+        id: string,
+        user: {
+          id: string
+        }
+      } 
+    }[]
+  };
 }
 
 const ProjectCard = ({
@@ -16,11 +29,13 @@ const ProjectCard = ({
   title,
   name,
   avatarUrl,
-  userId
+  userId,
+  likes,
+  session
 }: Props) => {
   return (
     <div className="flexCenter flex-col rounded-2xl drop-shadow-card">
-      <Link href={`/project/${id}`} className="flexCenter group relative 
+      <Link href={`/application/project/${id}`} className="flexCenter group relative 
       w-full h-full">
         <Image
           src={image}
@@ -37,7 +52,7 @@ const ProjectCard = ({
 
       <div className="flexBetween w-full px-2 mt-3 font-semibold text-sm">
         <Link
-          href={`/profile/${userId}`}
+          href={`/application/profile/${userId}`}
         >
           <div className="flexCenter gap-2">
             <Image 
@@ -52,15 +67,16 @@ const ProjectCard = ({
         </Link>
 
         <div className="flexCenter gap-3">
-          <div className="flexCenter gap-2">
-            <Image src="/hearth.svg" width={13} height={12} alt="heart" />
-            <p className="text-sm">525</p>
-          </div>
+          <ProjectLike 
+            id={id} 
+            likes={likes}
+            session={session}
+          />
 
-          <div className="flexCenter gap-2">
+          {/* <div className="flexCenter gap-2">
             <Image src="/eye.svg" width={13} height={12} alt="eye" />
             <p className="text-sm">5.2k</p>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

@@ -8,7 +8,8 @@ const User = g.model('User', {
   description: g.string().optional(),
   githubUrl: g.url().optional(),
   linkedInUrl: g.url().optional(),
-  projects: g.relation(() => Project).list().optional()
+  projects: g.relation(() => Project).list().optional(),
+  likes: g.relation(() => Like).list().optional()
 }).auth((rules) => {
   rules.public().read();
 })
@@ -21,11 +22,22 @@ const Project = g.model('Project', {
   liveSiteUrl: g.url(),
   githubUrl: g.url(),
   category: g.string().search(),
-  createdBy: g.relation(() => User)
+  createdBy: g.relation(() => User),
+  likedBy: g.relation(() => Like).list().optional()
 }).auth((rules) => {
   rules.public().read(),
   rules.private().create().delete().update();
 })
+
+// @ts-ignore
+const Like = g.model('Like', {
+  user: g.relation(() => User),
+  project: g.relation(() => Project)
+}).auth((rules) => {
+  rules.public().read(),
+  rules.private().create().delete().update();
+})
+
 
 const jwt = auth.JWT({
   issuer: 'grafbase',

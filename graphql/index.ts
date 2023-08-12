@@ -30,9 +30,28 @@ export const updateProjectMutation = `
 	}
 `;
 
+export const updateUserMutation = `
+  mutation UpdateUser($email: String!, $input: UserUpdateInput!) {
+    userUpdate(by: { email: $email }, input: $input) {
+      user {
+        name
+        description
+      }
+    }
+  }
+`
+
 export const deleteProjectMutation = `
   mutation DeleteProject($id: ID!) {
     projectDelete(by: { id: $id }) {
+      deletedId
+    }
+  }
+`;
+
+export const deleteLikeMutation = `
+  mutation LikeDelete($id: ID!) {
+    likeDelete(by: { id: $id }) {
       deletedId
     }
   }
@@ -54,8 +73,31 @@ export const createUserMutation = `
 	}
 `;
 
+export const usersQuery = `
+  query getUsers($endCursor: String) {
+    userCollection(first: 12, after: $endCursor) {
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+      }
+      edges {
+        node {
+          name
+          email
+          avatarUrl
+          description
+          id
+          githubUrl
+        }
+      }
+    }
+  }
+`
+
 export const projectsQuery = `
-  query getProjects($category: String, $endCursor: String) {
+  query getProjects($category: String, $endCursor: String) @live {
     projectSearch(first: 8, after: $endCursor, filter: {category: {eq: $category}}) {
       pageInfo {
         hasNextPage
@@ -72,6 +114,16 @@ export const projectsQuery = `
           id
           image
           category
+          likedBy(first: 100) {
+            edges {
+              node {
+                id
+                user {
+                  id
+                }
+              }
+            }
+          }
           createdBy {
             id
             email
@@ -99,6 +151,16 @@ export const getProjectByIdQuery = `
         name
         email
         avatarUrl
+      }
+      likedBy(first: 100) {
+        edges {
+          node {
+            id
+            user {
+              id
+            }
+          }
+        }
       }
     }
   }
@@ -134,9 +196,35 @@ export const getProjectsOfUserQuery = `
             id
             title
             image
+            likedBy(first: 100) {
+              edges {
+                node {
+                  id
+                  user {
+                    id
+                  }
+                }
+              }
+            }
           }
         }
       }
     }
   }
 `;
+
+export const createLike = `
+  mutation LikeCreate($input: LikeCreateInput!) {
+    likeCreate(input: $input) {
+      like {
+        user {
+          email
+        }
+        project {
+          id
+        }
+        id
+      }
+    }
+  }
+`

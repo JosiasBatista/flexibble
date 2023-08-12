@@ -32,7 +32,7 @@ const ProjectActions = ({ projectId }: Props) => {
   return (
     <>
       <Link
-        href={`/edit-project/${projectId}`}
+        href={`/application/edit-project/${projectId}`}
         className="flexCenter edit-action_btn"
       >
         <Image

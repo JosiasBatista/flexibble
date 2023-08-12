@@ -5,6 +5,7 @@ import AuthProviders from './AuthProviders';
 import { getCurrentUser } from '@/lib/session';
 import { signOut } from 'next-auth/react';
 import ProfileMenu from './ProfileMenu';
+import Button from './Button';
 
 const Navbar = async () => {
   const session = await getCurrentUser();
@@ -12,7 +13,7 @@ const Navbar = async () => {
   return (
     <nav className="flexBetween navbar">
       <div className="flex-1 flexStart gap-10">
-        <Link href="/">
+        <Link href="/application">
           <Image
             src="/logo.svg"
             width={115}
@@ -35,12 +36,22 @@ const Navbar = async () => {
             <>
               <ProfileMenu session={session} />
               
-              <Link href="/create-project">
+              <Link 
+                href="/application/create-project"
+                className="py-2 px-3 rounded-xl bg-primary-purple text-white"
+              >
                 Share Work
               </Link>
             </>
           ) : (
-            <AuthProviders />
+            <Link 
+              href="/signin"
+              className="py-2 px-3 rounded-xl bg-primary-purple text-white"
+            >
+              Sign In
+            </Link>
+            
+            // <AuthProviders />
           )
         }
       </div>

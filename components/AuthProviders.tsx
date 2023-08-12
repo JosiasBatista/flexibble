@@ -34,8 +34,10 @@ const AuthProviders = () => {
         {Object.values(providers).map((provider: Provider, i) => (
           <Button 
             key={i}
-            handleClick={() => signIn(provider?.id)}
-            title="Sign In"
+            handleClick={() => signIn(provider?.id, {
+              callbackUrl: window.location.origin
+            })}
+            title={`Sign in with ${provider.name}`}
           />
         ))}
       </div>

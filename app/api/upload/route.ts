@@ -23,7 +23,7 @@ export async function POST(request: Request) {
       unique_filename: false,
       overwrite: true,
       transformation: [
-        {width: 1000, height: 752, crop: 'scale'}
+        {width: 1000, height: 752, crop: 'fill'}
       ]
     }
 

@@ -23,6 +23,16 @@ export interface ProjectInterface {
       avatarUrl: string;
       id: string;
     };
+    likedBy: {
+      edges: { 
+        node: {
+          id: string,
+          user: {
+            id: string
+          }
+        } 
+      }[]
+    }
 }
 
 export interface UserProfile {

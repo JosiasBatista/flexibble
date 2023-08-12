@@ -1,34 +1,21 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Flexibble: 
+## Project for creatives developers build a community where they can share their projects, grow and get hired. 
 
-## Getting Started
+![image](https://github.com/JosiasBatista/flexibble/assets/55117241/4e81ad96-c131-4148-8419-ae8811980fe7)
 
-First, run the development server:
+### Introduction
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+This application was create to let developers share their work and get inspired by others projects to create awesome applications and whatever they want.
+You can login with you Google account, post work, see post, see user's profiles to check on their works and soon it will be possible to like posts to create a real community.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This application was created with NextJS, Grafbase, GraphQL, Cloundinary and use Tailwind and Typescript.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+To see the live project you can check here: https://flexibble-application.vercel.app/
 
-## Learn More
+If you want to run in your machine just run "npm run dev" in the root folder and open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-To learn more about Next.js, take a look at the following resources:
+## Inspiration
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This project was inspired in the Dribbble Project.

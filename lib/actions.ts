@@ -1,5 +1,5 @@
 import { ProjectForm } from "@/common.types";
-import { createLike, createProjectMutation, createUserMutation, deleteLikeMutation, deleteProjectMutation, getProjectByIdQuery, getProjectsOfUserQuery, getUserQuery, projectsQuery, updateProjectMutation, updateUserMutation, usersQuery } from "@/graphql";
+import { createLike, createProjectMutation, createUserMutation, deleteLikeMutation, deleteProjectMutation, getProjectByIdQuery, getProjectsOfUserQuery, getUserQuery, projectsQuery, projectsQueryFiltered, updateProjectMutation, updateUserMutation, usersQuery } from "@/graphql";
 import { GraphQLClient } from "graphql-request";
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -122,10 +122,16 @@ export const dislikePost = async (likeId: string,
 export const fetchAllProjects = async (category?: string, endCursor?: string) => {
   client.setHeader('x-api-key', apiKey)
 
-  return makeGraphQLRequest(projectsQuery, {
-    category,
-    endCursor
-  })
+  if (category) {
+    return makeGraphQLRequest(projectsQueryFiltered, {
+      category: category || undefined,
+      endCursor
+    })
+  } else {
+    return makeGraphQLRequest(projectsQuery, {
+      endCursor
+    })
+  }
 }
 
 export const getProjectDetails = (id: string) => {

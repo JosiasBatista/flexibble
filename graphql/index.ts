@@ -97,6 +97,46 @@ export const usersQuery = `
 `
 
 export const projectsQuery = `
+  query getProjects($endCursor: String) @live {
+    projectSearch(first: 8, after: $endCursor) {
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+      }
+      edges {
+        node {
+          title
+          githubUrl
+          description
+          liveSiteUrl
+          id
+          image
+          category
+          likedBy(first: 100) {
+            edges {
+              node {
+                id
+                user {
+                  id
+                }
+              }
+            }
+          }
+          createdBy {
+            id
+            email
+            name
+            avatarUrl
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const projectsQueryFiltered = `
   query getProjects($category: String, $endCursor: String) @live {
     projectSearch(first: 8, after: $endCursor, filter: {category: {eq: $category}}) {
       pageInfo {

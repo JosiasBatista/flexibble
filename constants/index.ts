@@ -29,6 +29,7 @@ export const footerLinks = [
       // 'Go Pro!',
       'Explore development work',
       'Development blog',
+      'Contribute with the project',
       // 'Code podcast',
       // 'Open-source projects',
       // 'Refer a Friend',
@@ -36,7 +37,8 @@ export const footerLinks = [
     ],
     linksUrl: [
       process.env.NEXTAUTH_URL,
-      'https://josias-devblog.vercel.app/'
+      'https://josias-devblog.vercel.app/',
+      'https://github.com/JosiasBatista/flexibble'
     ]
   },
   {

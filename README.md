@@ -6,9 +6,11 @@
 ### Introduction
 
 This application was create to let developers share their work and get inspired by others projects to create awesome applications and whatever they want.
-You can login with you Google account, post work, see post, see user's profiles to check on their works and soon it will be possible to like posts to create a real community.
+You can login with you Google account, post work, see post, see user's profiles to check on their works and and also like them.
 
-This application was created with NextJS, Grafbase, GraphQL, Cloundinary and use Tailwind and Typescript.
+People can see developer's profile and their work to make contact and hire them to build projects. This make the platform a way of build your portfolio in a simple and fast way and share all of your projects with the world.
+
+This application was created with NextJS, Grafbase, GraphQL, Cloudinary and use Tailwind and Typescript.
 
 ### Usage
 
@@ -18,4 +20,4 @@ If you want to run in your machine just run "npm run dev" in the root folder and
 
 ## Inspiration
 
-This project was inspired in the Dribbble Project.
+This project was inspired in the Dribbble Project Layout.
